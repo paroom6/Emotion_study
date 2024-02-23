@@ -1,11 +1,9 @@
 /** @jsxImportSource @emotion/react */
-import { FaCaretRight, FaCaretLeft} from "react-icons/fa";
-import * as S from "./style";
+import { FaCaretDown,FaCaretUp } from "react-icons/fa";
+import * as S from "./style"
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-
-
-function SideBar(props) {
+function TopSideBar(props) {
     const [isShow, setShow] = useState(false);
     const menus = useMemo(() => [
         {
@@ -16,7 +14,7 @@ function SideBar(props) {
         {
             id:2,
             path:"/board",
-            name:"게시글"
+            name:"게시판"
         },
         {
             id:3,
@@ -25,19 +23,17 @@ function SideBar(props) {
         },
     ])
 
-
-
     return (
         <aside css={S.layout(isShow)}>
-            <button css={S.toggleButton} onClick={() => setShow(!isShow)}>
-                {isShow ? <FaCaretLeft /> : <FaCaretRight />}
-            </button> 
-            <ul>
+            <ul css={S.itemContainer}>
                 {menus.map(menu => <Link to={menu.path} key={menu.id} css={S.menuItem} onClick={() => setShow(!isShow)}><li>{menu.name}</li></Link>)}
             </ul>
+            <button css={S.toggleButton} onClick={() => setShow(!isShow)}>
+                    {isShow ? <FaCaretUp /> : < FaCaretDown/>}
+            </button> 
         </aside>
     );
 
 }
 
-export default SideBar;
+export default TopSideBar;
