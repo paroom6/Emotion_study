@@ -11,13 +11,14 @@ function Mypage(props) {
         if(e.target.files.length === 0) {
             return;
         }
-        const fileReader = new FileReader();
+        const fileReader = new FileReader(); //1회용
+        
         console.log(e.target.files);
+        fileReader.readAsDataURL(e.target.files[0]);//호출시
         fileReader.onload = (e) => {//호출
             setpreview(e.target.result);
         };
-        fileReader.readAsDataURL(e.target.files[0]);//호출시
-        
+        console.log(preview);
     }
     return (
         <>

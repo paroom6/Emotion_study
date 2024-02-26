@@ -4,6 +4,7 @@ import SideBar from "./components/SideBar/SideBar";
 import TopSideBar from "./components/TopSideBar/TopSideBar";
 import RootLayout from "./components/RootLayout/RootLayout";
 import Mypage from "./pages/Mypage/Mypage";
+import { MENUS } from "./constants/menu";
 
 
 function App() {
@@ -15,9 +16,7 @@ function App() {
     <TopSideBar/>
     <RootLayout>
      <Routes>
-        <Route path="/mypage" element={<Mypage/>}/> 
-        <Route path="/board" element={<>게시판</>}/>
-        <Route path="/notice" element={<>공지사항</>}/>
+        {MENUS.map(menu => <Route path={menu.path} element={menu.element} key={menu.id}/>)}
       </Routes>
     </RootLayout>
   </>
