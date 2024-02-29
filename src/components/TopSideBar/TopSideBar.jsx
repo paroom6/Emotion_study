@@ -11,7 +11,7 @@ function TopSideBar(props) {
     return (
         <aside css={S.layout(isShow)}>
             <ul css={S.itemContainer}>
-                {MENUS.map(menu => <Link to={menu.path} key={menu.id} css={S.menuItem} onClick={() => setShow(!isShow)}><li>{menu.name}</li></Link>)}
+                {MENUS.map(menu => <Link to={`${menu.path} ${!menu.params? "" :"?" + Object.entries(menu.params).map(([key,value]) => key + "=" +value).join("&")}`} key={menu.id} css={S.menuItem} onClick={() => setShow(!isShow)}><li>{menu.name}</li></Link>)}
             </ul>
             <button css={S.toggleButton} onClick={() => setShow(!isShow)}>
                     {isShow ? <FaCaretUp /> : < FaCaretDown/>}

@@ -45,13 +45,19 @@ export const MENUS = [
     },
     {
         id:7,
-        path:"/board/write",
+        path:"/board/write/:title",
         name:"게시글 작성",
+        params: {
+            title: "테스트 글입니다."
+        },
         element: <BoardWrite/>
     },
     {
         id:8,
-        path:"/board/list",
+        path:"/board/list/:page",
+        params: {
+            page: 1
+        },
         name:"게시글 목록",
         element: <BoardList/>
     },

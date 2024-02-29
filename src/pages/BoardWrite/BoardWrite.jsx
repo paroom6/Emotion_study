@@ -6,7 +6,7 @@ import { QUILL_MODULES } from '../../constants/quillModules';
 import { useInput, useMaxValueValidataInput } from '../../Hooks/inputHook';
 import { useQuillInput } from '../../Hooks/quillHook';
 import { useNavigate } from 'react-router-dom';
-import { useLoadList } from '../../Hooks/boardList';
+import { useLoadList, useLoadListByPageNumber } from '../../Hooks/boardList';
 
 const layout = css`
     display: flex;
@@ -52,6 +52,7 @@ const submitButton = css`
 function BoardWrite(props) {
     const boardIdRef = useRef(0);
     const navigate = useNavigate();
+    const {endPageNumber} = useLoadListByPageNumber();
     const [board, setBoard] = useState({//use로 사용하는 경우 reacthook이다
         boardId: 0,
         boardTitle: "",
@@ -66,16 +67,20 @@ function BoardWrite(props) {
     
 
     const handleSubmitClick = () => {
-        const board = ({
-            boardId: lastId + 1,
-            boardTitle: inputValue,
-            boardContent: quillValue
-        });
-        const newBoardList = [...boardList, board];
+        let newBoardList = [];
+        for (let i = 0; i < 203; i++) {
+            const board = ({
+                boardId: 1 + i,
+                boardTitle: inputValue + (i + 1),
+                boardContent: quillValue
+            });
+            newBoardList = [...newBoardList, board];
+            
+        }
         localStorage.setItem("boardList", JSON.stringify(newBoardList));
         alert("글 작성 완료")
         // window.location.replace() react 에서는 사용할 시 app부터 재랜더링 
-        navigate("/board/list");
+        navigate(`/board/list/:page?page=${endPageNumber}`);
     }
 
     return (

@@ -16,7 +16,7 @@ function SideBar(props) {
                 {isShow ? <FaCaretLeft /> : <FaCaretRight />}
             </button> 
             <ul>
-                {MENUS.map(menu => <Link to={menu.path} key={menu.id} css={S.menuItem} onClick={() => setShow(!isShow)}><li>{menu.name}</li></Link>)}
+                {MENUS.map(menu => <Link to={`${menu.path}${!menu.params ? "" :"?" + Object.entries(menu.params).map(([key,value]) => key + "=" +value).join("&")}`} key={menu.id} css={S.menuItem} onClick={() => setShow(!isShow)}><li>{menu.name}</li></Link>)}
             </ul>
         </aside>
     );
